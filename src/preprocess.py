@@ -45,12 +45,12 @@ def load_dataset(filepath: str) -> pd.DataFrame:
     df = pd.read_csv(filepath)
 
     # Fill missing values
-    for col in ("author", "title", "text"):
+    for col in ("title", "text", "subject"):
         if col in df.columns:
             df[col] = df[col].fillna("")
 
     # Create combined content feature
-    df["content"] = df["author"] + " " + df["title"]
+    df["content"] = df["title"].astype(str) + " " + df["text"].astype(str)
 
     return df
 
